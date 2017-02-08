@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{yfonts}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{multicol}
+	\title{PHYS488: Week1 - General Excerises}
+	\author{Zachary Humphreys \\ 200951438}	
+	\date{30/1/2017}
+	\lstset{basicstyle=\tiny}
+	
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		\begin{center}
+		\textit{This weeks set of tasks focused on learning about loops, if functions, and arrays, and involved executing some sample programs provided for Task 1, updating a program created last week to be done using arrays, and loops in Task 2, and learning how to export data from code by writing to an .csv file in Task 3.}
+		\end{center}
+	\end{abstract}
+%Main Body of text in 2Column format
+\begin{multicols}{2}
+	\section{Task 1}
+		In this task, five java programs were provided and each of these codes were to be run and inspected to see how they work. These programs were imported into BlueJ and, in the case of \textit{FindRoots.java}, corrected and executed.
+		\subsection{SimpleSum.java}
+			 This program was created to demonstrate the overall structure of how Java programs should be written, and specifically to demonstrate how to implement methods within a class. \\ \indent Lines 9 through 16 show a simple method that takes two \textit{double} variable inputs and outputs another \textit{double} variable with the value of the two inputs added together as it returns \textit{sum} which is a variable stated and calculated with lines 12 and 13. \\ \indent The main method then proceeds with asking the user to input two different variables into the console then uses the method from earlier in line 25 to calculate the sum of these two variables with:
+			 \begin{lstlisting}
+double ans = getsum(first, second);
+			 \end{lstlisting} 
+			 which returns the sum and in the subsequent line, this is printed to the user in the console
+		\subsection{FindRoots.java}
+			This program iterated on the demonstrations shown in \textit{SimpleSum.java} by having a similar structure of one short method and a main method handling most of the work. \\ \indent The method, like previous, takes two \textit{double} argument (inputs) and returns (outputs) a \textit{double}. However, the method is slightly more complicated than the previous program: instead of simply summing the two inputs, it finds the $n^{th}$ root of the $x$ input by returning the exponential of line 15. \\ \indent There are four provided examples of this method being called in the main method, with the last one failing to work (line 27):
+			\begin{lstlisting}
+screen.println(" The 3/2  root of 9*9*9 =  " + nthRoot(9*9*9,3/2));
+			\end{lstlisting} 
+			which returns the value 729, as if no $n^{th}$ root had been applied. This is due to the fact that the n given in the function is $3/2$ where java treats both values as integers, hence returning the value 1. By simply changing it to $(3./2)$, Java no longer treats the 3 as an integer and it returns the correct value, same as the line of code above it.
+		\subsection{SimpleLoops.java}
+			This code is different from the other two as it only consists of a single main, though it has two separate functions within it.
+			The first function demonstrates a \textit{for} loop for a loop where the number of iterations to be done is well known. It's contained within lines 14 to 16 and simply takes the iterations number, \textit{n}, and raises it to the power of itself. \\ \indent The second section in the main simply demonstrates how to use a \textit{while} loop to produce a simple number guessing game that keeps looping until the user's answer is equal to the randomly generated number in line 23. Within this while loop it has an \textit{if/else} statement between lines 28 and 32 that finishes the print line from above with either higher or lower depending on whether the guess is higher or lower respectively. \\ \indent If the user finally inputs the correct value, the while loop will stop and print a line congratulating the player. Unfortunately, if the player is not good at guessing, it could potentially form an infinite loop.
+		\subsection{SimpleArray.java}
+			This program demonstrates a way to input an array of a length $numberToStore$ determined by the user. It then uses this value to determined the maximum number of loops in the \textit{for} loop starting on line 16, which asks the user to input each number followed by an enter in turn to be put into the array. The second \textit{for} loop is used to output each of the numbers from the compiled array to check if these were the values the user wanted.
+		\subsection{Interpolate.java}
+			The overall function of this program is to take an input from the user and output an estimated reaction cross section sigma value. It did this by first having an array of values for the cross section in line 14. These effectively provided a framework for the curve by having the values calculated at exact energy intervals of 10 MeV. The while function on lines 28 through 54 would loop as long as the user did not input a zero, and would ask the user to input an energy. \\ \indent The energy inputted by the user would then have it's array element number calculated on line 36 with lines 39 to 42 doing a quick check to make sure the value inputted actually fell into the energy range of a bin. \\ \indent Lines 44 to 48 gave the bin's element number, and the energy range it fell into, and lines 51 to 53 then did a quick interpolation by first finding how close it was the top end of the bin, and using this weighting in line 52 to do a weighted average of the cross section values assosiated to the energy values of the bin and then outputted this weighted average sigma value to the console in line 53.
+	\section{Task 2}
+		This task involved modifying the code for the last section of week 1's set of tasks to reduce the number variables and replace them with arrays instead, and to reduce repetition in the code and replace repeatable bits with loops instead.
+	\section{Task 3}
+		%TODO
+		\subsection{Task3.1}
+			%TODO
+		\subsection{Task3.2}
+			%TODO
+
+
+
+\end{multicols}
+\newpage
+
+
+%Appendixes for Codedump
+\title{Appendices}
+\begin{center}
+
+%TODO
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\end{center}
+\end{document}
