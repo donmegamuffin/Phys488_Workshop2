@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{lipsum}
 \usepackage{multicol}
+\usepackage{hyperref}
 	\title{PHYS488: Week1 - General Excerises}
 	\author{Zachary Humphreys \\ 200951438}	
 	\date{30/1/2017}
@@ -42,7 +43,58 @@ screen.println(" The 3/2  root of 9*9*9 =  " + nthRoot(9*9*9,3/2));
 		\subsection{Interpolate.java}
 			The overall function of this program is to take an input from the user and output an estimated reaction cross section sigma value. It did this by first having an array of values for the cross section in line 14. These effectively provided a framework for the curve by having the values calculated at exact energy intervals of 10 MeV. The while function on lines 28 through 54 would loop as long as the user did not input a zero, and would ask the user to input an energy. \\ \indent The energy inputted by the user would then have it's array element number calculated on line 36 with lines 39 to 42 doing a quick check to make sure the value inputted actually fell into the energy range of a bin. \\ \indent Lines 44 to 48 gave the bin's element number, and the energy range it fell into, and lines 51 to 53 then did a quick interpolation by first finding how close it was the top end of the bin, and using this weighting in line 52 to do a weighted average of the cross section values assosiated to the energy values of the bin and then outputted this weighted average sigma value to the console in line 53.
 	\section{Task 2}
-		This task involved modifying the code for the last section of week 1's set of tasks to reduce the number variables and replace them with arrays instead, and to reduce repetition in the code and replace repeatable bits with loops instead.
+		\subsection{Methodology}
+		This task involved modifying the code for the last section of week 1's set of tasks to reduce the number variables and replace them with arrays instead, and to reduce repetition in the code and replace repeatable bits with loops instead. \\ \indent To first start this task, I started by writing down on paper in "pseudocode" what I wanted my program to do, and how to do it. The initial ideas, though almost identical in structure to the final implementation, was very different in the techniques used as new and alternative techniques were learnt in the few days trying to achieve the program I envisioned. \\ \indent This meant a fair amount of extra knowledge not contained within the lecture had be learnt and adapted to get my code to work how I wanted it to, and this was done mostly through the use of recommended textbook \footnote{J. Hubbard, Programming with Java,(2004), 2nd edition, McGraw-Hill. } and Oracle's own documentation online concerning their code. The initial paper plan for the program went thus:
+		\begin{lstlisting}
+Class 4Vecs V2
+  Method: 4Vec ToArray      (1)
+  Method: 4Vec MomentumCalc (2)
+  Method: 4Vec MassCalc     (3)
+  Method: 4Vec Adder        (4)
+  Main:   Loop(n from 0 to 1 ) {
+	    Input 4Vec_n as seperate variables
+	    Do methods (1), (2), (3) }
+	    Use (4) to add 4Vec_0 and 4Vec_1
+	    Do (2) (3)
+	    Output answers to console - END
+		\end{lstlisting}
+		Unfortunately, after a few hours with this plan, two big problems occurred: Issues using two arrays as arguments for methods, and getting a loop to produce variables with a suffix $"_ n"$ where n was the loop number which could be used for calculations in the loop. Another problem was the clumsy unclear main, filled with more complex code than some of the methods making it hard to understand and read. Instead, this iteration was almost entirely scrapped with only some of the shells of the methods intact, such as the discovery that it was much easier to implement a method to calculate both the Momentum and the invariant mass of the given four vector, and was much fewer lines of code as a result.
+		
+		As a by-product of learning about multiple arrays as arguments to a method, 2D arrays were discovered, and from there, a new cleaner strategy was implemented. The paper code was rewritten and revisualised for clarity and the final paper iteration for the framework was thus:
+		\begin{lstlisting}
+Class 4Vecs V2.1
+  Method: 4Vec Array Builder (1)
+  Method: 4Vec Mass and Momentum Extractor (2)
+  Method: 4Vec Array Adder (3)
+  Main:   4VecArray = (1)
+     MassMomentumArray = (2)
+     4VecAddedArray= (3)
+     AddedMassMomentumArray = (2)
+     Print needed stuff - END
+		\end{lstlisting}
+		 This iteration, at first, still contained a mix of 1D and 2D arrays for calculations, but eventually, the entire framework was readjusted to accepted 2D arrays at every input and output for all the methods for consistency. \footnote{The history of this program during the later stages can be viewed at  \url{https://github.com/donmegamuffin/Phys488_Workshop2}}   %TODO "THE VISUALISATION IS IN APPEND 
+			\subsection{Method 1 - ArrayCompiler}
+			The first method, the Array Builder (lines 15 to 32), was created to take a string of numbers from the user and convert them into usable \textit{double}s for calculations later on, built into a 2D array, where each array row was a four vector. As the question only required calculation for two four vectors, the for loops number of loops are baked in to have them. The \textit{for} loop on line 20 deals with the four-vectors as a whole, where it requests the user to input into the console the four vector in the format:
+			\begin{lstlisting}
+	 000 000 000 000
+e.g. 150 040 -35 -20
+			\end{lstlisting}
+			and the second \textit{for} loop would pull substrings out of the input string and convert them into \textit{double} array elements. \\ \indent This had a couple of limitations: all values had to be integers, positive values could only go up to a maximum of 999 and negatives were limited to -99 as - took up a character slot. This was due to the fact I could not find out how to code it to read a number up to an empty space and then turn everything up to then into a number, to then continue onwards to the next number, etc. However, for the values requested in the Task, this was more than sufficient. \\ \indent The output of this method was an output of a 2D Array with each vector stored in one row.
+			\subsection{Method 2 - ArrayMandPExtractor}
+			This method, took one of the four-vector 2D arrays, and would then calculate the absolute momentum and invariant mass (lines 40 and 41) for both vectors, and place them into a 2x2 2D matrix from earlier, again, with each vectors values placed in separate rows.
+			\subsection{Method 3 - ArrayAdder}
+			Again, this is another simple Method that initialises a two row, four column array and takes the input four vector array, and adds the values from row 2 to row 1 and outputs this new 2D array.
+			\subsection{Method 4 - ConsoleWriter}
+			To make the main method more readable, all the code that was used to write the solutions to the console was moved to a separate method, which takes 3 arguments which are all the 2D matrices generated so far. This was initially done with the function:
+			\begin{lstlisting}
+import java.util.Arrays;
+...
+...
+screen.println(Array.deepToString())
+			\end{lstlisting}
+			to print the arrays to the console in as few lines as possible, but unfortunately doesn't give any context to the numbers, so was replaced after the debugging.
+			\subsection{Main}
+			This section is now much cleaner than the original implementation consisting of only 5 lines of code, 4 of which (lines 79 to 82) are simply 2D array definitions with the final one of these (line 84) taking these arrays and applying them to the ConsoleWriter method. This method is, as a result, now much easier to read and understand as much of it is written in almost plain English.
 	\section{Task 3}
 		%TODO
 		\subsection{Task3.1}
