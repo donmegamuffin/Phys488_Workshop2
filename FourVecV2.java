@@ -16,7 +16,7 @@ class FourVecV2
     {
         //Asks user to input four vector into the form: 123 456 789 012
         //Pulls values for energy and momentum vectors out of the string and compiles them in an array
-        double[][] arrayOut = {{0,0,0,0},{0,0,0,0}};
+        double[][] arrayOut = new double [2][4]; //{{0,0,0,0},{0,0,0,0}};
         for(int i=0;i<2;i++)
         {   //Request input from user
             screen.println("FOR FOUR VECTOR: "+(i+1));
@@ -34,7 +34,7 @@ class FourVecV2
     //Method 2: Takes an inputted Array and calculates the Rest Mass and Invariant Momentum
     private static double[][] ArrayMandPextractor(double[][] arrayIn)
     {
-        double[][] arrayOut = {{0,0},{0,0}};
+        double[][] arrayOut = new double [2][2];
         for(int i=0;i<2;i++)
         {   //Does the maths to calculate |P| and M.
             double AbsMomentum = Math.sqrt(Math.pow(arrayIn[i][1],2) + Math.pow(arrayIn[i][2],2) + Math.pow(arrayIn[i][3],2));
@@ -49,7 +49,7 @@ class FourVecV2
     //Method 3: Takes a 2D array and adds  the two dimensions and puts them in top row
     private static double[][] ArrayAdder(double arrayIn[][])
     {   
-        double[][] arrayOut = {{0,0,0,0},{0,0,0,0}};
+        double[][] arrayOut = new double [2][4];
         for(int n = 0; n<4; n++)
         {
             arrayOut[0][n] = (arrayIn[0][n] + arrayIn[1][n]);
