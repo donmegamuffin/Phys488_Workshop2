@@ -52,11 +52,11 @@ Class 4Vecs V2
   Method: 4Vec MassCalc     (3)
   Method: 4Vec Adder        (4)
   Main:   Loop(n from 0 to 1 ) {
-	    Input 4Vec_n as seperate variables
-	    Do methods (1), (2), (3) }
-	    Use (4) to add 4Vec_0 and 4Vec_1
-	    Do (2) (3)
-	    Output answers to console - END
+	  Input 4Vec_n as seperate variables
+      Do methods (1), (2), (3) }
+      Use (4) to add 4Vec_0 and 4Vec_1
+      Do (2) (3)
+      Output answers to console - END
 		\end{lstlisting}
 		Unfortunately, after a few hours with this plan, two big problems occurred: Issues using two arrays as arguments for methods, and getting a loop to produce variables with a suffix $"_ n"$ where n was the loop number which could be used for calculations in the loop. Another problem was the clumsy unclear main, filled with more complex code than some of the methods making it hard to understand and read. Instead, this iteration was almost entirely scrapped with only some of the shells of the methods intact, such as the discovery that it was much easier to implement a method to calculate both the Momentum and the invariant mass of the given four vector, and was much fewer lines of code as a result.
 		
@@ -96,11 +96,43 @@ screen.println(Array.deepToString())
 			\subsection{Main}
 			This section is now much cleaner than the original implementation consisting of only 5 lines of code, 4 of which (lines 79 to 82) are simply 2D array definitions with the final one of these (line 84) taking these arrays and applying them to the ConsoleWriter method. This method is, as a result, now much easier to read and understand as much of it is written in almost plain English.
 	\section{Task 3}
-		%TODO
+		\begin{table*}[h]
+			\title{Task3.1}
+			\begin{lstlisting}
+41 final double binlow  = 0.4; // this is the low edge of the first bin , hist1[0].       
+42 final double binhigh = 0.9; // this is the upper edge of the last bin, hist1[SIZE-1].  
+43 long numberUnderflows=0; // this is the number of random values that fall below binlow.
+44 long numberOverflows=0; // this is the number of random values that fall above binhigh. 
+48 double [] histError = new double[SIZE]; // Empty array is filled zeroes  
+92 screen.printf("Bin number " + bin + " contents =  " +  hist[bin]+ ";error = " + "%.3f", histError[bin]);
+93 screen.println(" ("+ (hist[bin]/histError[bin]) +"%)");                
+97 screen.println("The number of random numbers overflowed: " +numberOverflows);
+98 screen.println("The number of random numbers underflowed: " +numberUnderflows); 
+\end{lstlisting}
+\title{Task3.2}
+\begin{lstlisting}
+21  outputFile.println("ntrials  , " + trials); 
+22  outputFile.println("#Underflowed  , " + under); 
+23  outputFile.println("#Overflowed  , " + over); 
+69  if(randNumber <=binlow || randNumber >=binhigh) // <<TASK 3.2>>> Under/Over
+70  {
+72 		 if(randNumber <=binlow)
+73 		 {
+74  		 numberUnderflows++;
+75  	 }
+76  	if(randNumber >=binhigh)
+77  	{
+78 		  numberOverflows++;
+79  	}
+80  }
+100 writeToDisk(hist, binlow, binsize, trials, numberUnderflows, numberOverflows, "test.csv"); 
+	\end{lstlisting}
+\end{table*}
 		\subsection{Task3.1}
-			%TODO
+
 		\subsection{Task3.2}
-			%TODO
+			
+			
 
 
 
