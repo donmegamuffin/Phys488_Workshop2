@@ -7,6 +7,7 @@
 \usepackage{lipsum}
 \usepackage{multicol}
 \usepackage{hyperref}
+\usepackage{color}
 	\title{PHYS488: Week1 - General Excerises}
 	\author{Zachary Humphreys \\ 200951438}	
 	\date{30/1/2017}
@@ -98,7 +99,7 @@ screen.println(Array.deepToString())
 \begin{table*}[t]
 \hrule
 \title{Task3.1}
-\begin{lstlisting}
+\begin{lstlisting}[language=java, tabsize=1, showspaces=false, showstringspaces=false]
 41 final double binlow  = 0.4; // this is the low edge of the first bin , hist1[0].       
 42 final double binhigh = 0.9; // this is the upper edge of the last bin, hist1[SIZE-1].  
 43 long numberUnderflows=0; // this is the number of random values that fall below binlow.
@@ -153,6 +154,20 @@ screen.println(Array.deepToString())
 
 \section{Appendices}
 \subsection{Task2: Console Output}
+CASE 1:
+\begin{lstlisting}
+FOR FOUR VECTOR: 1
+Please input the four vector where each four vector has 3 digits and each is separated by a space:	
+005 004 000 000
+FOR FOUR VECTOR: 2
+Please input the four vector where each four vector has 3 digits and each is separated by a space:	
+005 -04 000 000
+The momentum of Four Vector 1 is 3.000 GeV and the rest mass is 4.000 GeV.
+The momentum of Four Vector 2 is 3.000 GeV and the rest mass is 4.000 GeV.
+The addition of the two vectors is (10.0,0.0,0.0,0.0).
+The momentum of Added Four Vector is 10.000 GeV and the rest mass is 0.000 GeV.
+\end{lstlisting}
+CASE 2:
 	\begin{lstlisting}
 FOR FOUR VECTOR: 1
 Please input the four vector where each four vector has 3 digits and each is separated by a space:	
@@ -166,7 +181,7 @@ The addition of the two vectors is (400.0,0.0,25.0,50.0).
 The momentum of Added Four Vector is 396.074 GeV and the rest mass is 55.902 GeV.
 	\end{lstlisting}
 \subsection{Task2: Code}
-\begin{lstlisting}
+\begin{lstlisting}[language=java, numbers=left, tabsize=1, showspaces=false, showstringspaces=false]
 /*Author: Zachary Humphreys; ID: 200951438
 *Date: 07/02/17
 */
@@ -265,6 +280,7 @@ class FourVecV2
 	}
 }
 \end{lstlisting}
+Please see \url{https://github.com/donmegamuffin/Phys488_Workshop2/blob/master/FourVecV2.java} if you would like a more clear copy of the code.
 \subsection{Task3.1: Console output Example}
 \begin{lstlisting}
 Input the number of random numbers to generate
