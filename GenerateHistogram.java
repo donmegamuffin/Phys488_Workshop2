@@ -17,9 +17,10 @@ class GenerateHistogram
         outputFile.println("Binlow , " + low);     // note the comma in the text here
         outputFile.println("Binint , " + dx);
         outputFile.println("nbins  , " + hist.length);
-        outputFile.println("ntrials  , " + trials);
-        outputFile.println("#Underflowed  , " + under);
-        outputFile.println("#Overflowed  , " + over);
+        //<<<TASK3.2 : Prints the amount of trials, underflows, and overflows at the top of the .csv>>>
+        outputFile.println("ntrials  , " + trials); 
+        outputFile.println("#Underflowed  , " + under); 
+        outputFile.println("#Overflowed  , " + over); 
         // now make a loop to write the contents of each bin to disk, one number at a time
         // together with the x-coordinate of the centre of each bin.
         for (int n = 0; n < hist.length; n++) 
@@ -38,13 +39,13 @@ class GenerateHistogram
     public static void main (String [] args ) throws IOException
     {
     final int SIZE = 20; // note : the array elements are numbered 0, 1 , 2 ,3 ,.... SIZE-1 
-    final double binlow  = 0.4; // this is the low edge of the first bin , hist1[0].
-    final double binhigh = 0.9; // this is the upper edge of the last bin, hist1[SIZE-1].
-    long numberUnderflows=0; // this is the number of random values that fall below binlow.
-    long numberOverflows=0; // this is the number of random values that fall above binhigh.
+    final double binlow  = 0.4; // this is the low edge of the first bin , hist1[0].       <<<TASK3.1>>>
+    final double binhigh = 0.9; // this is the upper edge of the last bin, hist1[SIZE-1].  <<<TASK3.1>>>
+    long numberUnderflows=0; // this is the number of random values that fall below binlow. <<TASK3.1>>>
+    long numberOverflows=0; // this is the number of random values that fall above binhigh. <<TASK3.1>>>
     
     int [] hist = new int[SIZE]; //  The array is filled with zeros, see page 162 Hubbard
-    double [] histError = new double[SIZE]; // Empty array is filled zeroes
+    double [] histError = new double[SIZE]; // Empty array is filled zeroes                 <<TASK3.1>>>
     Random value = new Random(); // instantiate a variable of the class Random
     
     final double binsize = (binhigh - binlow)/( (double)SIZE);  // note the cast (double)
@@ -65,9 +66,9 @@ class GenerateHistogram
         }
 
         // calculate which bin of the array should be increased by 1
-        if(randNumber <=binlow || randNumber >=binhigh)
+        if(randNumber <=binlow || randNumber >=binhigh) // <<TASK 3.2>>> Under/Over
         {
-            //Checks for outlyers and tallies values
+            //Checks for outliers and tallies values
             if(randNumber <=binlow)
             {
                 numberUnderflows++;
@@ -88,14 +89,14 @@ class GenerateHistogram
     long sum = 0;
     for (int bin = 0; bin < SIZE; bin++) {
         histError[bin] = Math.sqrt(hist[bin]);
-        screen.printf("Bin number " + bin + " contents =  " +  hist[bin]+ ";error = " + "%.3f", histError[bin]);
-        screen.println(" ("+ (hist[bin]/histError[bin]) +"%)");
+        screen.printf("Bin number " + bin + " contents =  " +  hist[bin]+ ";error = " + "%.3f", histError[bin]); //<<<TASK3.1>>>
+        screen.println(" ("+ (hist[bin]/histError[bin]) +"%)"); //<<TASK3.1>>
         sum = sum + hist[bin];
     }
     screen.println("Number of trials = " + trials + " , the sum of the contents = " + sum );
-    screen.println("The number of random numbers overflowed: " +numberOverflows);
-    screen.println("The number of random numbers underflowed: " +numberUnderflows);
+    screen.println("The number of random numbers overflowed: " +numberOverflows); //<<<TASK3.1>>>
+    screen.println("The number of random numbers underflowed: " +numberUnderflows); //<<<TASK3.1>>
     screen.println("Writing to disk, please wait....");
-    writeToDisk(hist, binlow, binsize, trials, numberUnderflows, numberOverflows, "test.csv");
+    writeToDisk(hist, binlow, binsize, trials, numberUnderflows, numberOverflows, "test.csv");  //<<TASK3.2>>
     }
 }
