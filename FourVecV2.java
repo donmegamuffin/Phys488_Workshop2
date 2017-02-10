@@ -32,7 +32,7 @@ class FourVecV2
     }
     
     //Method 2: Takes an inputted Array and calculates the Rest Mass and Invariant Momentum
-    private static double[][] ArrayMandPextractor(double[][] arrayIn)
+    private static double[][] ArrayMandPExtractor(double[][] arrayIn)
     {
         double[][] arrayOut = new double [2][2];
         for(int i=0;i<2;i++)
@@ -61,15 +61,18 @@ class FourVecV2
     private static void ConsoleWriter(double[][] PM_Array, double[][] fourVadded_Array, double[][] PMadded_Array)
     {
         //For input arrays
-        screen.println("The momentum of Four Vector 1 is " + PM_Array[0][0]
-                    + " GeV and the rest mass is " + PM_Array[0][1] + " GeV");
-        screen.println("The momentum of Four Vector 2 is "+ PM_Array[1][0]
-                    + " GeV and the rest mass is "+ PM_Array[1][1] + " GeV");
+        screen.printf("The momentum of Four Vector 1 is %.3f" , PM_Array[0][0]);
+        screen.printf(" GeV and the rest mass is %.3f", PM_Array[0][1]);
+        screen.println(" GeV.");
+        screen.printf("The momentum of Four Vector 2 is %.3f", PM_Array[1][0]); 
+        screen.printf(" GeV and the rest mass is %.3f", PM_Array[1][1]);
+        screen.println(" GeV.");
         //For added arrays
         screen.println("The addition of the two vectors is (" +fourVadded_Array[0][0]+ ","
                     +fourVadded_Array[0][1]+","+fourVadded_Array[0][2]+","+fourVadded_Array[0][3]+").");
-        screen.println("The momentum of Added Four Vector is "+ PMadded_Array[0][0]
-                    + " GeV and the rest mass is "+ PMadded_Array[0][1] + " GeV");
+        screen.printf("The momentum of Added Four Vector is %.3f", PMadded_Array[0][0]); 
+        screen.printf(" GeV and the rest mass is %.3f", PMadded_Array[0][1]);
+        screen.println(" GeV.");
     }
     
     // --------- MAIN ----------------------------------------------------------------------------------------------
@@ -77,9 +80,9 @@ class FourVecV2
     {
         //Calculates necessary Variables using methods
         double[][] fourVector_Array = ArrayCompiler();
-        double[][] MassMomentum_Array = ArrayMandPextractor(fourVector_Array);
+        double[][] MassMomentum_Array = ArrayMandPExtractor(fourVector_Array);
         double[][] fourVectorAdded_Array = ArrayAdder(fourVector_Array);
-        double[][] MassMomentumAdded_Array = ArrayMandPextractor(fourVectorAdded_Array);
+        double[][] MassMomentumAdded_Array = ArrayMandPExtractor(fourVectorAdded_Array);
         //Uses Arrays to write to console
         ConsoleWriter(MassMomentum_Array,fourVectorAdded_Array,MassMomentumAdded_Array);
         
